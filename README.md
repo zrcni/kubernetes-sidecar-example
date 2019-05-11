@@ -1,18 +1,14 @@
 ## kubernetes-sidecar-example
 
+[http://sidecar.samulir.site](http://sidecar.samulir.site)
+
 Replace \<PROJECT-ID\> with Google Cloud project id in deployment.yaml
 
 The docker-compose is only for local development.
 
 ```console
-docker build -t sidecar-example-app:latest ./app
-docker build -t sidecar-example-sidecar:latest ./sidecar
-
-docker tag sidecar-example-app:latest eu.gcr.io/<project-id>/app-container:<version>
-docker tag sidecar-example-sidecar:latest eu.gcr.io/<project-id>/sidecar-container:<version>
-
-docker push eu.gcr.io/<project-id>/app-container:<version>
-docker push eu.gcr.io/<project-id>/sidecar-container:<version>
+./update-app-image <tag>
+./update-sidecar-image <tag>
 
 kubectl apply -f deployment.yaml
 kubectl apply -f service.yaml

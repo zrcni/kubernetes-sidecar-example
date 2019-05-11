@@ -15,3 +15,5 @@ fi
 docker build -t sidecar-example-app:latest ./app
 docker tag sidecar-example-app:latest "eu.gcr.io/$projectId/app-container:$version"
 docker push "eu.gcr.io/$projectId/app-container:$version"
+
+echo "app-container tag updated to $version. Update it in the deployment"

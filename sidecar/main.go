@@ -63,7 +63,7 @@ func main() {
 			imageIds := map[string]string{}
 
 			count := 0
-			for count < 5 {
+			for count < 4 {
 				body, id, err := fetchRandomImage()
 				if err != nil {
 					log.Println(err)
