@@ -1,29 +1,38 @@
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: app-pod
+  name: app-deployment
   labels:
     app: app
 spec:
-  containers:
-  - name: app-container
-    image: eu.gcr.io/<PROJECT-ID>/app-container:v1.3
-    env:
-    - name: IMAGE_DIR
-      value: /images
-    volumeMounts:
-    - mountPath: /images
-      name: shared-images
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app
+  template:
+    metadata:
+      labels:
+        app: app 
+    spec:
+      containers:
+      - name: app-container
+        image: eu.gcr.io/<PROJECT-ID-HERE>/app-container:v1.4
+        env:
+        - name: IMAGE_DIR
+          value: /images
+        volumeMounts:
+        - mountPath: /images
+          name: shared-images
 
-  - name: sidecar-container
-    image: eu.gcr.io/<PROJECT-ID>/sidecar-container:v1.1
-    env:
-    - name: IMAGE_DIR
-      value: /images
-    volumeMounts:
-    - mountPath: /images
-      name: shared-images
+      - name: sidecar-container
+        image: eu.gcr.io/<PROJECT-ID-HERE>/sidecar-container:v1.3
+        env:
+        - name: IMAGE_DIR
+          value: /images
+        volumeMounts:
+        - mountPath: /images
+          name: shared-images
 
-  volumes:
-  - name: shared-images
-    emptyDir: {}
+      volumes:
+      - name: shared-images
+        emptyDir: {}

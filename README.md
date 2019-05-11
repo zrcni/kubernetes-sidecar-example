@@ -2,7 +2,7 @@
 
 [http://sidecar.samulir.site](http://sidecar.samulir.site)
 
-Replace \<PROJECT-ID\> with Google Cloud project id in deployment.yaml
+Replace \<PROJECT-ID-HERE\> with Google Cloud project ID in deployment.yaml
 
 The docker-compose is only for local development.
 
@@ -15,7 +15,7 @@ kubectl apply -f service.yaml
 ```
 
 ### app
-Container with a web server that serves a page with images in it. The images are served from a shared volume which is mounted at /images.
+Web server that serves a page with images. The images are served from a shared volume which is mounted at /images.
 
 ### sidecar
-Container with a program that downloads images and saves them to the shared volume mounted at /images. Images are updated every X seconds.
+Downloads images and saves them to the shared volume mounted at /images. Images are updated every X seconds.

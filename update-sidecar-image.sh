@@ -12,7 +12,7 @@ if [[ -z $version ]];then
   exit 1
 fi
 
-docker build -t sidecar-example-sidecar:latest ./app
+docker build -t sidecar-example-sidecar:latest ./sidecar
 docker tag sidecar-example-sidecar:latest "eu.gcr.io/$projectId/sidecar-container:$version"
 docker push "eu.gcr.io/$projectId/sidecar-container:$version"
 
