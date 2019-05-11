@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: app-container
-        image: eu.gcr.io/<PROJECT-ID-HERE>/app-container:v1.4
+        image: eu.gcr.io/<PROJECT-ID-HERE>/app-container:v1.7
         env:
         - name: IMAGE_DIR
           value: /images
@@ -25,7 +25,7 @@ spec:
           name: shared-images
 
       - name: sidecar-container
-        image: eu.gcr.io/<PROJECT-ID-HERE>/sidecar-container:v1.3
+        image: eu.gcr.io/<PROJECT-ID-HERE>/sidecar-container:v1.6
         env:
         - name: IMAGE_DIR
           value: /images

@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"path/filepath"
 	"text/template"
 	"time"
 )
@@ -21,6 +22,16 @@ type PageData struct {
 type Image struct {
 	Name   string
 	Source string
+}
+
+func getExecPath() string {
+	ex, err := os.Executable()
+	if err != nil {
+		log.Println(err)
+		return "/"
+	}
+	exPath := filepath.Dir(ex)
+	return exPath
 }
 
 func makeImageURL(name string) string {
@@ -49,7 +60,8 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	tmpl, err := template.ParseFiles("/app/templates/index.html")
+	templatePath := fmt.Sprintf("%stemplates/index.html", getExecPath())
+	tmpl, err := template.ParseFiles(templatePath)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		fmt.Fprint(w, err.Error())

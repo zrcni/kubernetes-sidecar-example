@@ -67,6 +67,7 @@ func main() {
 				body, id, err := fetchRandomImage()
 				if err != nil {
 					log.Println(err)
+					time.Sleep(1 * time.Second)
 					continue
 				}
 
