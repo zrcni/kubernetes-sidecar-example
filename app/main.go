@@ -58,7 +58,7 @@ func imagesHandler(w http.ResponseWriter, r *http.Request) {
 
 	data := PageData{
 		Images:          images,
-		ImagesUpdatedAt: imagesUpdatedAt.Format("01/02/2006 15:04 MST"),
+		ImagesUpdatedAt: imagesUpdatedAt.Format("2/1/2006 15:04:05 MST"),
 		Title:           "kubernetes-sidecar-example",
 	}
 	tmpl.Execute(w, data)
