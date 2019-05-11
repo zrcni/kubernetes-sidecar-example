@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: app-container
-        image: eu.gcr.io/<PROJECT-ID-HERE>/app-container:v1.7
+        image: eu.gcr.io/<PROJECT-ID-HERE>/app-container:v1.8
         env:
         - name: IMAGE_DIR
           value: /images

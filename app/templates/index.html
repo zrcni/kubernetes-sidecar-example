@@ -15,7 +15,8 @@
         </a>
       </p>
     </div>
-    <p>Images updated at: {{.ImagesUpdatedAt}}</p>
+    <p>Images update once a minute</p>
+    <p>Last updated: {{.ImagesUpdatedAt}}</p>
     <div>
       {{range .Images}}
         <img src={{.Source}} alt={{.Name}} />

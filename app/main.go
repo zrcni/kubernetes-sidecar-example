@@ -60,8 +60,7 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	templatePath := fmt.Sprintf("%stemplates/index.html", getExecPath())
-	tmpl, err := template.ParseFiles(templatePath)
+	tmpl, err := template.ParseFiles("./templates/index.html")
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		fmt.Fprint(w, err.Error())
