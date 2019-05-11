@@ -1,19 +1,25 @@
 version: "3.2"
 services:
   app:
-    build: ./app
+    build:
+      context: ./app
+      dockerfile: dev.Dockerfile
     ports:
       - 3000:3000
     environment:
       - IMAGE_DIR=/images
     volumes:
       - shared-images:/images
+      - ./app:/app
   sidecar:
-    build: ./sidecar
+    build:
+      context: ./sidecar
+      dockerfile: dev.Dockerfile
     environment:
       - IMAGE_DIR=/images
     volumes:
       - shared-images:/images
+      - ./sidecar:/app
 
 volumes:
   shared-images:

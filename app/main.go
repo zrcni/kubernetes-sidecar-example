@@ -50,7 +50,7 @@ func imagesHandler(w http.ResponseWriter, r *http.Request) {
 
 	data := PageData{
 		Images: images,
-		Title:  "app",
+		Title:  "kubernetes-sidecar-example",
 	}
 	tmpl.Execute(w, data)
 }
