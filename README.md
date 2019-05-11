@@ -17,5 +17,5 @@ kubectl apply -f service.yaml
 ### app
 Container with a web server that serves a page with images in it. The images are served from a shared volume which is mounted at /images.
 
-### sidecar container
+### sidecar
 Container with a program that downloads images and saves them to the shared volume mounted at /images. Images are updated every X seconds.

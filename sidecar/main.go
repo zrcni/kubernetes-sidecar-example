@@ -59,9 +59,10 @@ func main() {
 	go func() {
 		for {
 			clearImageDir()
+			log.Println("Removed images")
 			imageIds := map[string]string{}
-			count := 0
 
+			count := 0
 			for count < 5 {
 				body, id, err := fetchRandomImage()
 				if err != nil {
@@ -81,6 +82,7 @@ func main() {
 				}
 				count++
 			}
+			log.Println("Saved images")
 
 			time.Sleep(30 * time.Second)
 		}

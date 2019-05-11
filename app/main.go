@@ -9,13 +9,15 @@ import (
 	"os/signal"
 	"syscall"
 	"text/template"
+	"time"
 )
 
 var imgDir = os.Getenv("IMAGE_DIR")
 
 type PageData struct {
-	Images []Image
-	Title  string
+	Images          []Image
+	Title           string
+	ImagesUpdatedAt string
 }
 
 type Image struct {
@@ -32,16 +34,24 @@ func imagesHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	var imagesUpdatedAt time.Time
 	var images []Image
+
 	for _, f := range files {
 		image := Image{
 			Name:   f.Name(),
 			Source: makeImageURL(f.Name()),
 		}
 		images = append(images, image)
+
+		fileModifiedAt := f.ModTime()
+		if imagesUpdatedAt.Unix() < fileModifiedAt.Unix() {
+			imagesUpdatedAt = fileModifiedAt
+		}
 	}
 
-	tmpl, err := template.ParseFiles("/app/layout.html")
+	tmpl, err := template.ParseFiles("/app/templates/index.html")
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		fmt.Fprint(w, err.Error())
@@ -49,8 +59,9 @@ func imagesHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	data := PageData{
-		Images: images,
-		Title:  "kubernetes-sidecar-example",
+		Images:          images,
+		ImagesUpdatedAt: imagesUpdatedAt.Format("01/02/2006 15:04 MST"),
+		Title:           "kubernetes-sidecar-example",
 	}
 	tmpl.Execute(w, data)
 }
@@ -60,6 +71,8 @@ func main() {
 	http.Handle("/images/", http.StripPrefix("/images/", fs))
 
 	http.HandleFunc("/", imagesHandler)
+
+	log.Println("Listening on port 3000")
 	log.Fatal(http.ListenAndServe(":3000", nil))
 
 	<-exitOnSignal(syscall.SIGINT, syscall.SIGTERM)
