@@ -84,7 +84,7 @@ func main() {
 			}
 			log.Println("Saved images")
 
-			time.Sleep(30 * time.Second)
+			time.Sleep(60 * time.Second)
 		}
 	}()
 
