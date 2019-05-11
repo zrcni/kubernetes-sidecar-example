@@ -1,0 +1,19 @@
+version: "3.2"
+services:
+  app:
+    build: ./app
+    ports:
+      - 3000:3000
+    environment:
+      - IMAGE_DIR=/images
+    volumes:
+      - shared-images:/images
+  sidecar:
+    build: ./sidecar
+    environment:
+      - IMAGE_DIR=/images
+    volumes:
+      - shared-images:/images
+
+volumes:
+  shared-images:

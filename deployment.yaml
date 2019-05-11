@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app-pod
+  labels:
+    app: app
+spec:
+  containers:
+  - name: app-container
+    image: eu.gcr.io/temperature-cron/app-container:v1.1
+    env:
+    - name: IMAGE_DIR
+      value: /images
+    volumeMounts:
+    - mountPath: /images
+      name: shared-images
+
+  - name: sidecar-container
+    image: eu.gcr.io/temperature-cron/sidecar-container:v1
+    env:
+    - name: IMAGE_DIR
+      value: /images
+    volumeMounts:
+    - mountPath: /images
+      name: shared-images
+
+  volumes:
+  - name: shared-images
+    emptyDir: {}
