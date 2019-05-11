@@ -3,9 +3,11 @@
 The docker-compose is only for local development.
 
 ```console
-docker-compose build
-docker tag kubernetes-sidecar-example_app:latest eu.gcr.io/<project-id>/app-container:<version>
-docker tag kubernetes-sidecar-example_sidecar:latest eu.gcr.io/<project-id>/sidecar-container:<version>
+docker build -t sidecar-example-app:latest ./app
+docker build -t sidecar-example-sidecar:latest ./sidecar
+
+docker tag sidecar-example-app:latest eu.gcr.io/<project-id>/app-container:<version>
+docker tag sidecar-example-sidecar:latest eu.gcr.io/<project-id>/sidecar-container:<version>
 
 docker push eu.gcr.io/<project-id>/app-container:<version>
 docker push eu.gcr.io/<project-id>/sidecar-container:<version>

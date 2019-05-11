@@ -6,8 +6,6 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"os/signal"
-	"syscall"
 	"text/template"
 	"time"
 )
@@ -74,20 +72,4 @@ func main() {
 
 	log.Println("Listening on port 3000")
 	log.Fatal(http.ListenAndServe(":3000", nil))
-
-	<-exitOnSignal(syscall.SIGINT, syscall.SIGTERM)
-}
-
-func exitOnSignal(sigs ...os.Signal) chan bool {
-	sigsChan := make(chan os.Signal, 1)
-	done := make(chan bool, 1)
-
-	signal.Notify(sigsChan, sigs...)
-
-	go func() {
-		<-sigsChan
-		done <- true
-	}()
-
-	return done
 }
