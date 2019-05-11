@@ -1,6 +1,6 @@
 ## kubernetes-sidecar-example
 
-Replace <PROJECT-ID> in deployment.yaml with Google Cloud project id
+Replace \<PROJECT-ID\> with Google Cloud project id in deployment.yaml
 
 The docker-compose is only for local development.
 

@@ -27,7 +27,7 @@ func makeImageURL(name string) string {
 	return fmt.Sprintf("/images/%s", name)
 }
 
-func imagesHandler(w http.ResponseWriter, r *http.Request) {
+func indexHandler(w http.ResponseWriter, r *http.Request) {
 	files, err := ioutil.ReadDir(imgDir)
 	if err != nil {
 		log.Fatal(err)
@@ -68,7 +68,7 @@ func main() {
 	fs := http.FileServer(http.Dir(imgDir))
 	http.Handle("/images/", http.StripPrefix("/images/", fs))
 
-	http.HandleFunc("/", imagesHandler)
+	http.HandleFunc("/", indexHandler)
 
 	log.Println("Listening on port 3000")
 	log.Fatal(http.ListenAndServe(":3000", nil))

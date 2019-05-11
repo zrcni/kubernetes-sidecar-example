@@ -3,7 +3,12 @@ version=$1
 projectId=$PROJECT_ID
 
 if [[ -z $projectId ]];then
-  echo "Set env variable PROJECT_ID"
+  echo "set env variable PROJECT_ID"
+  exit 1
+fi
+
+if [[ -z $version ]];then
+  echo "provide container tag as the first arg"
   exit 1
 fi
 
