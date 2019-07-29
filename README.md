@@ -1,8 +1,6 @@
 ## kubernetes-sidecar-example
 
-[http://sidecar.samulir.site](http://sidecar.samulir.site)
-
-The docker-compose is only for local development.
+docker-compose is only for local development.
 
 ### app
 Web server that serves a page with images. The images are served from a shared volume which is mounted at /images.
